@@ -173,4 +173,4 @@ def localAlignment(match_reward: int, mismatch_penalty: int, indel_penalty: int,
             i = i-1
             j=j-1
         
-    return (maxScore, sFinal, tFinal)
+    return (maxScore, sFinal, tFinal, i, j)
