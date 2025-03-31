@@ -15,6 +15,7 @@ def main():
     parser.add_argument("filepath", help="Path to the file containing two DNA sequences.")
     parser.add_argument("--match", type=int, required=True, help="Match score (required).")
     parser.add_argument("--mismatch", type=int, required=True, help="Mismatch penalty (required).")
+    parser.add_argument("--indel", type = int, required = True, help = "Indel penalty (required).")
     parser.add_argument("--gap_open", type=int, required=True, help="Gap opening penalty (required).")
     parser.add_argument("--gap_extend", type=int, required=True, help="Gap extension penalty (required).")
     parser.add_argument("--output", type=str, default="result.txt", help="Output file (default: result.txt).")
@@ -40,8 +41,10 @@ def main():
 
     # Run Local Alignment if specified or if no specific option is given
     if args.local_align or (not args.global_align and not args.local_align):
+        def local_alignment(match_reward: int, mismatch_penalty: int, indel_penalty: int,
+                     s: str, t: str) -> Tuple[int, str, str]:
         score, aligned_seq1, aligned_seq2, start_x, start_y = local_alignment(
-            seq1, seq2, args.match, args.mismatch, args.gap_open
+            args.match, args.mismatch, args.indel, seq1, seq2
         )
         results.append("Local Alignment:")
         results.append(f"{aligned_seq1} starting at position {start_x}")
