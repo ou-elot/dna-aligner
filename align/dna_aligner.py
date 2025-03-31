@@ -13,14 +13,14 @@ def main():
         description="DNA Sequence Alignment Tool: Perform global or local sequence alignment."
     )
     parser.add_argument("filepath", help="Path to the file containing two DNA sequences.")
-    parser.add_argument("--match", type=int, required=True, help="Match score (required).")
-    parser.add_argument("--mismatch", type=int, required=True, help="Mismatch penalty (required).")
-    parser.add_argument("--indel", type = int, required = True, help = "Indel penalty (required).")
-    parser.add_argument("--gap_open", type=int, required=True, help="Gap opening penalty (required).")
-    parser.add_argument("--gap_extend", type=int, required=True, help="Gap extension penalty (required).")
+    parser.add_argument("--match", type=int, required=True, help="Match reward (required).")
+    parser.add_argument("--mismatch", type=int, required=True, help="Mismatch penalty, leave positive (if want -1, input 1) (required).")
+    parser.add_argument("--indel", type = int, required = True, help = "Indel penalty, leave positive (if want -1, input 1) (required).")
+    parser.add_argument("--gap_open", type=int, required=True, help="Gap opening penalty, leave positive (if want -1, input 1) (required).")
+    parser.add_argument("--gap_extend", type=int, required=True, help="Gap extension penalty, leave positive (if want -1, input 1) (required).")
     parser.add_argument("--output", type=str, default="result.txt", help="Output file (default: result.txt).")
-    parser.add_argument("--global-align", action="store_true", help="Run only global alignment.")
-    parser.add_argument("--local-align", action="store_true", help="Run only local alignment.")
+    parser.add_argument("--global-align", action="store_true", help="Run only global alignment (default: both global and local).")
+    parser.add_argument("--local-align", action="store_true", help="Run only local alignment (default: both global and local).")
 
     args = parser.parse_args()
 
