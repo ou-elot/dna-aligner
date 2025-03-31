@@ -41,8 +41,6 @@ def main():
 
     # Run Local Alignment if specified or if no specific option is given
     if args.local_align or (not args.global_align and not args.local_align):
-        def local_alignment(match_reward: int, mismatch_penalty: int, indel_penalty: int,
-                     s: str, t: str) -> Tuple[int, str, str]:
         score, aligned_seq1, aligned_seq2, start_x, start_y = local_alignment(
             args.match, args.mismatch, args.indel, seq1, seq2
         )
