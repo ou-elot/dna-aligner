@@ -1,5 +1,5 @@
 import argparse
-from aligner_tools import global_alignment, localAlignment
+from aligner_tools import global_alignment, local_alignment
 
 def read_sequences(filepath):
     with open(filepath, "r") as file:
