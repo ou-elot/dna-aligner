@@ -97,7 +97,7 @@ def global_alignment(match_reward: int, mismatch_penalty: int,
         
     return (alignScore,sFinal,tFinal)
 
-def localAlignment(match_reward: int, mismatch_penalty: int, indel_penalty: int,
+def local_alignment(match_reward: int, mismatch_penalty: int, indel_penalty: int,
                      s: str, t: str) -> Tuple[int, str, str]:
     """
     Compute the global alignment of two strings based on given rewards and penalties.
