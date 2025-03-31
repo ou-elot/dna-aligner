@@ -14,34 +14,32 @@ def write_output(filepath, content):
         file.write(content)
 
 def main():
-    parser = argparse.ArgumentParser(description="DNA Sequence Alignment Tool")
-    parser.add_argument("filepath", type=str, help="Path to the file containing two DNA sequences.")
-    parser.add_argument("alignment_type", choices=["global", "local"], help="Type of alignment to perform.")
-    parser.add_argument("--match", type=int, default=1, help="Match reward (default: 1)")
-    parser.add_argument("--mismatch", type=int, default=1, help="Mismatch penalty (default: 1)")
-    parser.add_argument("--gap_open", type=int, default=1, help="Gap opening penalty (default: 1)")
-    parser.add_argument("--gap_extend", type=int, default=1, help="Gap extension penalty (default: 1)")
-    parser.add_argument("--output", type=str, default="alignment_output.txt", help="Output file name (default: alignment_output.txt)")
+    parser = argparse.ArgumentParser(
+        description="DNA Sequence Alignment Tool: Perform global or local sequence alignment."
+    )
+    parser.add_argument("filepath", help="Path to the file containing two DNA sequences.")
+    parser.add_argument("--match", type=int, required=True, help="Match score (required).")
+    parser.add_argument("--mismatch", type=int, required=True, help="Mismatch penalty (required).")
+    parser.add_argument("--gap_open", type=int, required=True, help="Gap opening penalty (required).")
+    parser.add_argument("--gap_extend", type=int, required=True, help="Gap extension penalty (required).")
+    parser.add_argument("--output", type=str, default="result.txt", help="Output file (default: result.txt).")
+    parser.add_argument("--global", action="store_true", help="Run only global alignment.")
+    parser.add_argument("--local", action="store_true", help="Run only local alignment.")
 
     args = parser.parse_args()
     seq1, seq2 = read_sequences(args.filepath)
 
-    output_content = ""
-
-    if args.alignment_type == "global":
-        score, aligned_s, aligned_t = global_alignment(
-            args.match, args.mismatch, args.gap_open, args.gap_extend, seq1, seq2
-        )
-        output_content = f"Global Alignment:\n{aligned_s}\n{aligned_t}\n"
-
-    elif args.alignment_type == "local":
-        score, aligned_s, aligned_t, start_x, start_y = local_alignment(
-            seq1, seq2, args.match, args.mismatch, args.gap_open
-        )
-        output_content = f"Local Alignment:\n{aligned_s} starting at position {start_x}\n{aligned_t} starting at position {start_y}\n"
-
-    write_output(args.output, output_content)
-    print(f"Alignment results saved to {args.output}")
+    with open(args.output, "w") as f:
+        if args.global:
+            score, aligned_s, aligned_t = global_alignment(args.match, args.mismatch, args.gap_open, args.gap_extend, seq1, seq2)
+            f.write(f"Global Alignment:\n{aligned_s}\n{aligned_t}\n\n")
+        elif args.local:
+            score, aligned_s, aligned_t, x, y = local_alignment(seq1, seq2, args.match, args.mismatch, args.gap_open)
+            f.write(f"Local Alignment:\n{aligned_s} starting at position {x}\n{aligned_t} starting at position {y}\n")
+        else:
+            # Default: Run both
+            f.write("Running both alignments...\n\n")
+            main()  # Call itself to run both
 
 if __name__ == "__main__":
     main()
