@@ -1,4 +1,6 @@
 # dna-aligner: A Command Line DNA Sequence Alignment Tool 
+DNA sequence alignment is a bioinformatics tool used in mutation detection, common evolutionary descent, protein structure and function analysis, and recognition of gene pools, etc.
+
 The dna-aligner tool is a simple command line tool that reads a .txt file. It processes this .txt file and generates the global alignment and local alignment. It also specifies the specific starting location of the local alignment for both strings. The result is output to a file. 
 
 No extra required packages such as Numpy are needed. 
