@@ -1,4 +1,4 @@
-# dna-aligner: A Command Line DNA Sequence Alignment Tool 
+# dna-aligner: Command Line Sequence Alignment Tool 
 DNA sequence alignment is a bioinformatics tool used to analyze mutation detection, common evolutionary descent, and protein structure and function, etc.
 
 This sequence alignment tool uses Hirschberg's dynamic programming algorithm to implement global alignment (Needleman-Wunsch) with affine gap penalties and local alignment (Smith-Waterman).
